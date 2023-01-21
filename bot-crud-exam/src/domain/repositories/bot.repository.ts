@@ -7,5 +7,5 @@ export abstract class BotRepository {
     abstract getBots(): Observable<BotModel>;
     abstract getBotById(params: {botId: string}): Observable<BotModel>;
     abstract deleteBotById(params: {botId: string}): Observable<BotModel>;
-    abstract updateBot(params: {name: string, type:string, status: string, active: boolean}): Observable<BotModel>;
+    abstract updateBot(params: {botId: string, name: string, type:string, status: string, active: boolean}): Observable<BotModel>;
 }
