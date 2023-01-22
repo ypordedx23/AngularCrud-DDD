@@ -8,6 +8,6 @@ export class BotSearchUseCase implements UseCase<{ botId: string }, BotModel> {
     execute(
        params: { botId: string },
     ): Observable<BotModel> {
-        return this.botRepository.getBotById(params);
+        return this.botRepository.getBotById(params.botId);
     }
 }

@@ -1,9 +1,9 @@
 export interface BotEntity {
-    _id: string;
+    _id?: string;
     name: string;
     type: string;
-    active: boolean;
+    active?: boolean;
     status: string;
     createdAt?: Date;
-    questions: string[];
+    questions?: string[];
 }

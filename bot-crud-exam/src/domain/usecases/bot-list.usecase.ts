@@ -3,9 +3,9 @@ import { UseCase } from '../base/usecase';
 import { BotModel } from '../models/bot.model';
 import { BotRepository } from '../repositories/bot.repository';
 
-export class BotListUseCase implements UseCase<void, BotModel> {
+export class BotListUseCase implements UseCase<void, BotModel[]> {
     constructor(private botRepository: BotRepository) { }
-    execute(): Observable<BotModel> {
+    execute(): Observable<BotModel[]> {
         return this.botRepository.getBots();
     }
 }

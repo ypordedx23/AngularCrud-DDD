@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="content">
+    <mat-card class="card">
+        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Recent Posts</h3>
+        </mat-card-title>
+        <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+                <table class="table">
+                    <thead>
+                        <th scope="col" *ngFor="let col of displayedColumns">{{col}}</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let bot of botDetails">
+                            <th scope="row">{{bot._id}}</th>
+                            <td>{{bot.name}}</td>
+                            <td>{{bot.type}}</td>
+                            <td>{{bot.status}}</td>
+                            <td>{{bot.createdAt}}</td>
+                            <td>
+                                <button button="edit" mat-raised-button color="primary" (click)="enableEditMode(bot)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button button="delete" mat-raised-button color="primary" (click)="deleteBot(bot)" >
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

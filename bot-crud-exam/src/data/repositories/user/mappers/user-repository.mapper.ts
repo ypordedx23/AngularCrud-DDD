@@ -1,31 +1,20 @@
 import { Mapper } from 'src/base/mapper';
+import { LoginModel } from 'src/domain/models/login.model';
 import { UserModel } from 'src/domain/models/user.model';
 import { UserEntity } from '../entities/user-entity';
 
 
-export class UserImplementationRepositoryMapper extends Mapper<UserEntity, UserModel> {
-    mapFrom(param: UserEntity): UserModel {
+export class UserImplementationRepositoryMapper extends Mapper<UserEntity, LoginModel> {
+    mapFrom(param: UserEntity): LoginModel {
         return {
-            _id: param._id,
-            name: param.name,
-            lastname: param.lastname,
-            username: param.username,
-            email: param.email,
-            status: param.status,
-            createdAt: param.createdAt,
-            role: param.role
+            user:param.user,
+            token: param.token
         };
     }
-    mapTo(param: UserModel): UserEntity {
+    mapTo(param: LoginModel): UserEntity {
         return {
-            _id: param._id,
-            name: param.name,
-            lastname: param.lastname,
-            username: param.username,
-            email: param.email,
-            status: param.status,
-            createdAt: param.createdAt,
-            role: param.role
+            user: param.user,
+            token: param.token
         }
     }
 }

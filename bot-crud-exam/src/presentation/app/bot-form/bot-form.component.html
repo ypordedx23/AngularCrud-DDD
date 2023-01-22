@@ -1,0 +1,43 @@
+<div class="container">
+    <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-card class="card">
+            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                <h3>Bot Registration Form</h3>
+            </mat-card-title>
+
+            <mat-card-content>
+                <div class="example-container mat-elevation-z8">
+                    <form [formGroup]="botForm" class="bot-form">
+                        <mat-form-field appearance="standard">
+                            <mat-label> Bot Name </mat-label>
+                            <input matInput type="text" placeholder="Bot name" formControlName="name" #nameInput>
+                        </mat-form-field>
+                        <mat-form-field appearance="standard">
+                            <mat-label> Bot Type </mat-label>
+                            <input matInput maxlength="15" placeholder="Bot type" formControlName="type" #typeInput>
+                        </mat-form-field>
+                        <mat-form-field appearance="standard">
+                            <mat-label> Bot Status </mat-label>
+                            <input matInput maxlength="15" placeholder="Bot status" formControlName="status" #statusInput>
+                        </mat-form-field>
+
+                        <select *ngIf="editToggle" class="form-select"  formControlName="active">
+                            <option value=true >True</option>
+                            <option value=false >False</option>
+                        </select>
+                        <br>
+                        <button *ngIf="!editToggle" (click)="onSubmit()" mat-raised-button color="primary"
+                            [disabled]="!botForm.valid">
+                            <mat-icon>add</mat-icon> Create Bot
+                        </button>
+                        <button *ngIf="editToggle" (click)="editBot()" mat-raised-button color="primary"
+                            [disabled]="!botForm.valid">
+                            <mat-icon>edit</mat-icon> Edit Bot
+                        </button>
+                    </form>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+</div>

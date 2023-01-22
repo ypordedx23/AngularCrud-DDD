@@ -6,7 +6,8 @@ import { UserEntity } from './entities/user-entity';
 import { UserImplementationRepositoryMapper } from './mappers/user-repository.mapper';
 import { UserRepository } from 'src/domain/repositories/user.repository';
 import { UserModel } from 'src/domain/models/user.model';
-import { AppSettings } from 'src/base/appsettings';
+import { AppSettings } from 'src/base/app-settings';
+import { LoginModel } from 'src/domain/models/login.model';
 
 
 @Injectable({
@@ -18,9 +19,9 @@ export class UserImplementationRepository extends UserRepository {
         super();
     }
 
-    login(params: {username: string, password: string}): Observable<UserModel> {
+    login(params: {username: string, password: string}): Observable<LoginModel> {
         return this.http
-            .post<UserEntity>(AppSettings.API_ENDPOINT+AppSettings.LOGIN_PATH, {params})
+            .post<UserEntity>(AppSettings.API_ENDPOINT+AppSettings.LOGIN_PATH, params)
             .pipe(map(this.userMapper.mapFrom));
     }
 
