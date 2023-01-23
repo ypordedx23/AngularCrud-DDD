@@ -1,6 +1,18 @@
-<div class="container">
-    <h1>Bot Registration Form</h1>
-    <form [formGroup]="botForm" class="bot-form ">
+<div class="container editform">
+    <h1>Bot Update Form</h1>
+    <form [formGroup]="searchBotForm" class="bot-search-form">
+        <mat-form-field appearance="standard">
+            <mat-label> Bot ID </mat-label>
+            <input matInput type="text" placeholder="Search by bot ID" formControlName="search" #searchInput>
+        </mat-form-field>
+        <button (click)="searchBot()" mat-raised-button color="primary">
+            <mat-icon>edit</mat-icon> Search Bot
+        </button>
+        
+    </form>
+    
+    <form [formGroup]="botForm" class="bot-form">
+        
         <mat-form-field appearance="standard">
             <mat-label> Bot Name </mat-label>
             <input matInput type="text" placeholder="Bot name" formControlName="name" #nameInput>
@@ -16,14 +28,16 @@
             <input matInput maxlength="15" placeholder="Bot status" formControlName="status" #statusInput>
         </mat-form-field>
         <br>
-        <select *ngIf="editToggle" class="form-select"  formControlName="active">
+        <select  class="form-select"  formControlName="active">
             <option value=true >True</option>
             <option value=false >False</option>
         </select>
         <br>
-        <button *ngIf="!editToggle" (click)="onSubmit()" mat-raised-button color="primary" 
+        <button (click)="editBot()" mat-raised-button color="primary"
             [disabled]="!botForm.valid">
-            <mat-icon>add</mat-icon> Create Bot
+            <mat-icon>edit</mat-icon> Edit Bot
         </button>
     </form>
+
+
 </div>

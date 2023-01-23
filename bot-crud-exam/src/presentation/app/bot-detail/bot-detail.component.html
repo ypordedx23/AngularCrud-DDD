@@ -1,32 +1,64 @@
+<p><mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">
+        menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+        close
+      </mat-icon>
+    </button>
+    <span class="exp-title">BOT CRUD EXAM</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button (click)="onLogout()" class="exp-log example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <span>LOGOUT</span>
+      <mat-icon>input</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+  
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" mode="side" opened class="mat-elevation-z8">
+      <button mat-button class="menu-button" routerLink="botList">
+        <mat-icon>dashboard</mat-icon>
+        <span><a  >BOT TABLE</a></span>
+      </button>
+      <button mat-button class="menu-button" routerLink="botForm">
+        <mat-icon>add_box</mat-icon>
+        <span><a  >BOT CREATION</a></span>
+      </button>
+      <button mat-button class="menu-button" routerLink="botEditForm" >
+        <mat-icon>edit</mat-icon>
+        <span><a >BOT EDITION</a></span>
+      </button>
+  
+      <mat-divider></mat-divider>
+  
+      <button mat-button class="menu-button">
+        <span>Yury Romero</span>
+      </button>
+  
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <div class="content mat-elevation-z8">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  
+  </mat-sidenav-container>
+
+<!--
+<ejs-sidebar id="default-sidebar">
+    <div class="title"> Bot CRUD</div>
+    <app-bot-form #botForm [botDetailComponent]="this"></app-bot-form>
+</ejs-sidebar>
 <div>
-    <br>
-    <div class="container">
-        <div class="container">
-            <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center"
-                class="content">
-                <div class="blocks">
-                    <button button="submit" mat-raised-button color="primary">
-                        <mat-icon>add</mat-icon> Add Post
-                    </button>
-                </div>
-            </div>
-        </div>
-        <br>
-        <mat-card class="card">
-            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-                <h3>Bot CRUD Dashboard</h3>
-            </mat-card-title>
-            <div class="container">
-                <app-bot-list #botList [botDetailComponent]="this"></app-bot-list>
-            </div>
-            <div class="container">
-                <app-bot-form #botForm [botDetailComponent]="this"></app-bot-form>
-            </div>
-        </mat-card>
-        
+    <div class="sub-title">
+        <app-bot-list #botList [botDetailComponent]="this"></app-bot-list>
     </div>
 </div>
-<br>
+
+-->
 
 
 <!--

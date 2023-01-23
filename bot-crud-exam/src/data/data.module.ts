@@ -9,9 +9,6 @@ import { BotRegisterUseCase } from 'src/domain/usecases/bot-register.usecas';
 import { BotUpdateUseCase } from 'src/domain/usecases/bot-update.usecase';
 import { BotSearchUseCase } from 'src/domain/usecases/bot-search.usecase';
 import { BotListUseCase } from 'src/domain/usecases/bot-list.usecase';
-import { UserImplementationRepository } from './repositories/user/user-implementation.repository';
-import { BotImplementationRepository } from './repositories/bot/bot-implementation.repository';
-
 
 const userLoginUseCaseFactory = 
 (userRepo: UserRepository) => new UserLoginUseCase(userRepo);

@@ -12,7 +12,7 @@ import { BotDetailComponent } from '../bot-detail/bot-detail.component';
 })
 export class BotListComponent implements OnInit {
   botDetails!: BotEntity[] ;
-  displayedColumns: string[] = ['id', 'name', 'type', 'status', 'created at', 'options'];
+  displayedColumns: string[] = ['ID', 'NAME', 'TYPE', 'STATUS', 'CREATED AT', 'OPTIONS'];
   index!: number;
 
   @Input() botDetailComponent!: BotDetailComponent;
@@ -26,10 +26,7 @@ export class BotListComponent implements OnInit {
     this.updateBotList();
   }
 
-  enableEditMode(bot: BotEntity){
-    this.botDetailComponent.botForm.editForm(true,bot);
-  }
-
+  
   updateBotList(){
     this.botListUseCase.execute().subscribe((botsInfo: BotEntity[])=>{
       console.log('response',botsInfo);

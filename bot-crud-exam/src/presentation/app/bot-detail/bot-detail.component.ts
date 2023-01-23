@@ -7,6 +7,9 @@ import { BotImplementationRepository } from 'src/data/repositories/bot/bot-imple
 import { Observable } from 'rxjs';
 import { BotFormComponent } from '../bot-form/bot-form.component';
 import { BotListComponent } from '../bot-list/bot-list.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 
 
@@ -20,11 +23,31 @@ export class BotDetailComponent implements OnInit {
   @ViewChild("botForm") botForm!: BotFormComponent;
   @ViewChild("botList") botList!: BotListComponent;
 
-  constructor(){}
+  @ViewChild(MatSidenav)
+ sidenav!: MatSidenav;
+
+  constructor(private observer: BreakpointObserver, private route: Router) {}
+
+  ngAfterViewInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    });
+  }
+
 
   async ngOnInit() {
    
    
   }
 
+
+  onLogout(){
+    this.route.navigateByUrl('');
+  }
 }

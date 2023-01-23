@@ -7,10 +7,12 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule} from '@angular/material/divider'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomTokenInterceptor } from 'src/data/interceptors/custom-token.interceptor';
@@ -22,6 +24,8 @@ import { BotImplementationRepository } from 'src/data/repositories/bot/bot-imple
 import { UserImplementationRepository } from 'src/data/repositories/user/user-implementation.repository';
 import { BotRepository } from 'src/domain/repositories/bot.repository';
 import { UserRepository } from 'src/domain/repositories/user.repository';
+import { BotEditFormComponent } from './bot-edit-form/bot-edit-form.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { UserRepository } from 'src/domain/repositories/user.repository';
     BotDetailComponent,
     LoginComponent,
     BotFormComponent,
-    BotListComponent
+    BotListComponent,
+    BotEditFormComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +47,10 @@ import { UserRepository } from 'src/domain/repositories/user.repository';
     MatTableModule,
     MatToolbarModule,
     MatMenuModule,
+    MatSidenavModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDividerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: CustomTokenInterceptor,multi : true },

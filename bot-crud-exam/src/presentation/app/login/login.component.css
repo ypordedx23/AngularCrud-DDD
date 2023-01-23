@@ -1,9 +1,25 @@
 .login-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .form-full-width {
-    width: 100%;
-  }
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: calc(100vh - 98px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+  display: flex;
+  overflow-x: hidden;
+  align-items: flex-start;
+  padding: 25px;
+  font-size: 2rem;
+  color: lightgray;
+}
+
+.form-full-width {
+  width: 100%;
+}
+
+mat-toolbar {
+  background: #004a9f;
+  color: white;
+}

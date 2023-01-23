@@ -9,6 +9,7 @@ import { debug } from 'console';
 import Swal from 'sweetalert2';
 import { BotRegisterUseCase } from 'src/domain/usecases/bot-register.usecas';
 import { BotUpdateUseCase } from 'src/domain/usecases/bot-update.usecase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bot-form',
@@ -27,7 +28,9 @@ export class BotFormComponent implements OnInit {
 
   @Input() botDetailComponent!: BotDetailComponent;
 
-  constructor(private botRegisterUseCase: BotRegisterUseCase, private botUpdateUseCase: BotUpdateUseCase) { }
+  constructor(private botRegisterUseCase: BotRegisterUseCase,
+     private botUpdateUseCase: BotUpdateUseCase,
+     private route: Router) { }
 
   ngOnInit(): void {
     this.editToggle = false;
@@ -59,7 +62,7 @@ export class BotFormComponent implements OnInit {
           this.botRegisterUseCase.execute(this.bot).subscribe((botInfo: BotEntity) => {
             console.log('response', botInfo);
             if (botInfo) {
-              this.botDetailComponent.botList.botDetails.push(botInfo);
+              this.route.navigateByUrl('/botDetail/botList')
               Swal.fire('Saved!', '', 'success');
             };
           })
@@ -69,36 +72,6 @@ export class BotFormComponent implements OnInit {
         }
       })
     }
-  }
-
-
-  editBot() {
-    if (this.botForm.valid) {
-      this.bot = {
-        name: this.botForm.value.name,
-        type: this.botForm.value.type,
-        status: this.botForm.value.status,
-        active: Boolean(this.botForm.value.active)
-      }
-      debugger
-      this.botUpdateUseCase.execute( this.bot, this.botId).subscribe((botInfo: BotEntity) => {
-        debugger
-        console.log('response upd', botInfo);
-        this.botDetailComponent.botList.updateBotList();
-        this.editForm(false, {
-          name: '',
-          type: '',
-          status: ''
-        })
-      })
-    }
-  }
-
-  editForm(toggle: boolean, bot: BotEntity) {
-    console.log(bot)
-    this.editToggle = toggle;
-    this.botId = bot._id!;
-    this.chargeFormValues(bot);
   }
 
 

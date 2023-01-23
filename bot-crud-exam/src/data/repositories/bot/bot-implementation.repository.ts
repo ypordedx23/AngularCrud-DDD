@@ -21,7 +21,6 @@ export class BotImplementationRepository extends BotRepository {
     }
 
     createBot(params: {name: string, type:string, status: string}): Observable<BotModel> {
-        debugger
         return this.http
             .post<BotEntity>(AppSettings.API_ENDPOINT+AppSettings.BOT_PATH, params)
             .pipe(map(this.botMapper.mapFrom));
@@ -34,6 +33,7 @@ export class BotImplementationRepository extends BotRepository {
     }
 
     getBotById(botId: string): Observable<BotModel> {
+        debugger
         return this.http
             .get<BotEntity>(AppSettings.API_ENDPOINT+AppSettings.BOT_PATH+'/'+botId)
             .pipe(map(this.botMapper.mapFrom));
@@ -46,7 +46,6 @@ export class BotImplementationRepository extends BotRepository {
     }
 
     updateBot(_id: string, params:BotEntity): Observable<BotModel> {
-        debugger
         console.log(params)
         return this.http
             .patch<BotEntity>(AppSettings.API_ENDPOINT+AppSettings.BOT_PATH+'/'+_id, params)

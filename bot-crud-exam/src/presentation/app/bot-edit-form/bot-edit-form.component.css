@@ -1,3 +1,4 @@
+
 .bot-form{
     display: flex;
     flex-direction: column;
@@ -7,7 +8,6 @@
     flex-wrap: wrap;
 }
 
-
-app-bot-form{
+app-bot-edit-form{
     width: 100%;
 }
