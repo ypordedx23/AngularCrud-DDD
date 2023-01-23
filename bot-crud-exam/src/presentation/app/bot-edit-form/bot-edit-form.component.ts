@@ -49,7 +49,6 @@ export class BotEditFormComponent implements OnInit {
         status: this.botForm.value.status,
         active: Boolean(this.botForm.value.active)
       }
-      debugger
       this.BotSearchUseCase.execute( this.auxBot, this.auxBot._id!).subscribe((botInfo: BotEntity) => {
        console.log('response upd', botInfo);
        this.chargeFormValues(botInfo);
