@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BotImplementationRepository } from 'src/data/repositories/bot/bot-implementation.repository';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { BotEntity } from 'src/data/repositories/bot/entities/bot-entity';
-import { BotModel } from 'src/domain/models/bot.model';
+import { BotDeleteUseCase } from 'src/domain/usecases/bot-delete.usecase';
+import { BotListUseCase } from 'src/domain/usecases/bot-list.usecase';
 import { BotDetailComponent } from '../bot-detail/bot-detail.component';
+
 
 @Component({
   selector: 'app-bot-list',
@@ -16,7 +17,10 @@ export class BotListComponent implements OnInit {
 
   @Input() botDetailComponent!: BotDetailComponent;
   
-  constructor(private botService: BotImplementationRepository) { }
+  constructor(private botListUseCase: BotListUseCase, 
+              private botDeleteUseCase: BotDeleteUseCase,) {
+
+   }
 
   ngOnInit(): void {
     this.updateBotList();
@@ -27,7 +31,7 @@ export class BotListComponent implements OnInit {
   }
 
   updateBotList(){
-    this.botService.getBots().subscribe((botsInfo: BotEntity[])=>{
+    this.botListUseCase.execute().subscribe((botsInfo: BotEntity[])=>{
       console.log('response',botsInfo);
       this.botDetails = botsInfo;
       console.log(this.botDetails)
@@ -36,7 +40,7 @@ export class BotListComponent implements OnInit {
 
   deleteBot(bot:BotEntity){
     this.index = this.botDetails.indexOf(bot);
-    this.botService.deleteBotById(bot._id!).subscribe((botsInfo: BotEntity)=>{
+    this.botDeleteUseCase.execute(bot._id!).subscribe((botsInfo: BotEntity)=>{
       console.log('response',botsInfo);
       this.updateBotList();
     })

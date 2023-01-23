@@ -8,7 +8,8 @@ export class BotUpdateUseCase implements UseCase<BotEntity, BotModel> {
     constructor(private botRepository: BotRepository) { }
     execute(
        params: BotEntity,
+       _id: string
     ): Observable<BotModel> {
-        return this.botRepository.updateBot('', params);
+        return this.botRepository.updateBot(_id, params);
     }
 }

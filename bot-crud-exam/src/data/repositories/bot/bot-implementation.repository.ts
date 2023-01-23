@@ -33,7 +33,7 @@ export class BotImplementationRepository extends BotRepository {
             .pipe(map(this.botsMapper.mapFrom));
     }
 
-    getBotById(botId: string): Observable<BotModel> {``
+    getBotById(botId: string): Observable<BotModel> {
         return this.http
             .get<BotEntity>(AppSettings.API_ENDPOINT+AppSettings.BOT_PATH+'/'+botId)
             .pipe(map(this.botMapper.mapFrom));

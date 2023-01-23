@@ -7,6 +7,8 @@ import { BotDetailComponent } from '../bot-detail/bot-detail.component';
 import { throws } from 'assert';
 import { debug } from 'console';
 import Swal from 'sweetalert2';
+import { BotRegisterUseCase } from 'src/domain/usecases/bot-register.usecas';
+import { BotUpdateUseCase } from 'src/domain/usecases/bot-update.usecase';
 
 @Component({
   selector: 'app-bot-form',
@@ -25,7 +27,7 @@ export class BotFormComponent implements OnInit {
 
   @Input() botDetailComponent!: BotDetailComponent;
 
-  constructor(private botService: BotImplementationRepository) { }
+  constructor(private botRegisterUseCase: BotRegisterUseCase, private botUpdateUseCase: BotUpdateUseCase) { }
 
   ngOnInit(): void {
     this.editToggle = false;
@@ -54,7 +56,7 @@ export class BotFormComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           console.log(this.bot);
-          this.botService.createBot(this.bot).subscribe((botInfo: BotEntity) => {
+          this.botRegisterUseCase.execute(this.bot).subscribe((botInfo: BotEntity) => {
             console.log('response', botInfo);
             if (botInfo) {
               this.botDetailComponent.botList.botDetails.push(botInfo);
@@ -79,7 +81,7 @@ export class BotFormComponent implements OnInit {
         active: Boolean(this.botForm.value.active)
       }
       debugger
-      this.botService.updateBot(this.botId, this.bot).subscribe((botInfo: BotEntity) => {
+      this.botUpdateUseCase.execute( this.bot, this.botId).subscribe((botInfo: BotEntity) => {
         debugger
         console.log('response upd', botInfo);
         this.botDetailComponent.botList.updateBotList();

@@ -15,6 +15,7 @@ import { BotImplementationRepository } from './repositories/bot/bot-implementati
 
 const userLoginUseCaseFactory = 
 (userRepo: UserRepository) => new UserLoginUseCase(userRepo);
+
 export const userLoginUseCaseProvider = {
     provide: UserLoginUseCase,
     useFactory: userLoginUseCaseFactory,
@@ -61,20 +62,5 @@ export const botDeleteUseCaseProvider = {
     deps: [BotRepository],
 };
 
-@NgModule({
-    providers: [
-        userLoginUseCaseProvider,
-        { provide: UserRepository, useClass: UserImplementationRepository },
-        botDeleteUseCaseProvider,
-        botListUseCaseProvider,
-        botRegisterUseCaseProvider,
-        botSearchUseCaseProvider,
-        botUpdateUseCaseProvider,
-        { provide: BotRepository, useClass: BotImplementationRepository },
-    ],
-    imports: [
-        CommonModule,
-        HttpClientModule,
-    ],
-})
+
 export class DataModule { }

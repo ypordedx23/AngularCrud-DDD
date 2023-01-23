@@ -17,6 +17,11 @@ import { CustomTokenInterceptor } from 'src/data/interceptors/custom-token.inter
 import { BotFormComponent } from './bot-form/bot-form.component';
 import { BotListComponent } from './bot-list/bot-list.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { userLoginUseCaseProvider, botDeleteUseCaseProvider, botRegisterUseCaseProvider, botSearchUseCaseProvider, botUpdateUseCaseProvider, botListUseCaseProvider } from 'src/data/data.module';
+import { BotImplementationRepository } from 'src/data/repositories/bot/bot-implementation.repository';
+import { UserImplementationRepository } from 'src/data/repositories/user/user-implementation.repository';
+import { BotRepository } from 'src/domain/repositories/bot.repository';
+import { UserRepository } from 'src/domain/repositories/user.repository';
 
 @NgModule({
   declarations: [
@@ -40,10 +45,18 @@ import {MatMenuModule} from '@angular/material/menu';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: CustomTokenInterceptor,
-    multi : true
-  }],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: CustomTokenInterceptor,multi : true },
+    userLoginUseCaseProvider,
+    { provide: UserRepository, useClass: UserImplementationRepository },
+    botDeleteUseCaseProvider,
+    botRegisterUseCaseProvider,
+    botSearchUseCaseProvider,
+    botUpdateUseCaseProvider,
+    botListUseCaseProvider,
+    { provide: BotRepository, useClass: BotImplementationRepository },
+    
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

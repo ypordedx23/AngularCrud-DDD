@@ -4,6 +4,7 @@ import { UserModel } from 'src/domain/models/user.model';
 import { AppSettings } from 'src/base/app-settings';
 import { UserImplementationRepository } from 'src/data/repositories/user/user-implementation.repository';
 import { Router } from '@angular/router';
+import { UserLoginUseCase } from 'src/domain/usecases/user-login.usecase';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
 
-  constructor(private loginService: UserImplementationRepository,
+  constructor(private loginUseCase: UserLoginUseCase,
     private route: Router) {
   }
 
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.user.password = this.loginForm.value.password;
       console.log(this._v());
       console.log(this.user);
-      this.loginService.login(this.user).subscribe((userInfo: any)=>{
+      this.loginUseCase.execute(this.user).subscribe((userInfo: any)=>{
         console.log('response',userInfo);
         localStorage.setItem(AppSettings.TOKEN_KEY, userInfo.token);
         this.route.navigateByUrl('/botDetail')
